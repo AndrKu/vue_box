@@ -12,6 +12,8 @@
     :posts="posts"    
     @remove="removePost"    
   />
+
+  
   <!-- postsPriem под этим названием этот ком-т принимает массив из ком-та PostList -->
 </template>
 
@@ -49,6 +51,7 @@ export default {
         },
         showDialog() {
           this.dialogVisible = true
+          
         }
     }
 }
