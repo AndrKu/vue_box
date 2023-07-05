@@ -16,11 +16,18 @@
  
   <post-list
     :posts="posts"    
+<<<<<<< HEAD
     @remove-post="removePost"
    > 
   </post-list>
  <!--  <div v-else>Loading....</div> -->
 </div>
+=======
+    @remove="removePost"    
+  />
+
+  
+>>>>>>> 53b45aaf9516a225641568456cda0a69ac3b5849
   <!-- postsPriem под этим названием этот ком-т принимает массив из ком-та PostList -->
 </template>
 
@@ -57,6 +64,7 @@ export default {
         },
         showDialog() {
           this.dialogVisible = true
+<<<<<<< HEAD
         },
         async fetchPosts() {
           try {
@@ -78,6 +86,11 @@ export default {
            
           }
         } */
+=======
+          
+        }
+    }
+>>>>>>> 53b45aaf9516a225641568456cda0a69ac3b5849
 }
 </script>
 

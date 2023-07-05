@@ -9,4 +9,5 @@ comp.forEach(elem => {
     
 })
 
+
 app.mount('#app');
