@@ -1,24 +1,19 @@
 <template>
     
-    <form @submit.prevent>
+    <form class="form-post" @submit.prevent>
         <my-input v-model="post.title" type="text" placeholder="название">
          </my-input>
         <my-input v-model="post.body" type="text" placeholder="тело поста">
          </my-input>
-        <my-btn  @click="addPost">
+         <my-btn  @click="addPost">
           Создать
-        </my-btn>
-        
+        </my-btn>   
     </form>
 
 </template>
 
 <script>
-import MyBtn from './UI/MyBtn';
-import MyInput from './UI/MyInput';
-
     export default {
-        components: { MyBtn, MyInput },
     data() {
         return {
             post: {
@@ -27,6 +22,7 @@ import MyInput from './UI/MyInput';
             }
         };
     },
+   
     methods: {
         addPost() {
             this.post.id = Date.now();
@@ -41,7 +37,7 @@ import MyInput from './UI/MyInput';
 </script>
 
 <style scoped>
-form {
+.form-post {
     display: flex;
     flex-direction: column;
 }

@@ -8,6 +8,8 @@
 
 <script>
     export default {
+        name: 'my-dialog',
+        emits: ['update:show'],
         props: {
             show: {
                 type: Boolean,

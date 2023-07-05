@@ -1,28 +1,31 @@
 <template>
        <div>
     <h3>Список пользователей</h3>
+    
     <!-- postPropsElement название элемента в дочернем компоненте -->
     <post-item
         v-for="post in posts"
-        :postPropsElement="post" 
+        :post="post" 
         :key="post.id"
-        @remove="$emit('remove', post)"
-     /> 
+        @remove-post="$emit('remove-post', post)"
+     > 
+    </post-item>
+    
+
     </div>
-     <div>
-        <h3>Нету элемента</h3>
-     </div>
 
 </template>
 
 <script>
-
 import PostItem from './PostItem.vue';
+
     export default {
         components: { PostItem },
+      
+        emits: ['remove-post'],
         props: {
             posts: Array,
-            required: true
+            required: true,
         }
     }
     

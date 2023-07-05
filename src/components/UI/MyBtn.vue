@@ -7,6 +7,7 @@
 <script>
     export default {
       name: 'my-btn',
+      //emits: ['click','update:show']
     }
 </script>
 
@@ -14,7 +15,6 @@
  .btn {
     background: aqua;
     padding: 5px 8px;
-    margin-left: auto;
  }
 
 </style>

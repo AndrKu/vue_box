@@ -1,42 +1,50 @@
 <template>
-  <my-btn @click="showDialog">
-    Создать пост
-  </my-btn>
+  <div>
+    <div class="btn-box">
+  <my-btn @click="showDialog">Создать пост</my-btn>
+  <my-select 
+    v-model="selestedSort" 
+    :options="sortOptions" >
+  </my-select>
+    </div>
+
   <my-dialog v-model:show="dialogVisible">
-        <PostForm
-           @create="addPost"
-         />
+        <post-form
+           @create="addPost">
+        </post-form>
   </my-dialog>
  
-  <PostList
+  <post-list
     :posts="posts"    
-    @remove="removePost"    
-  />
+    @remove-post="removePost"
+   > 
+  </post-list>
+ <!--  <div v-else>Loading....</div> -->
+</div>
   <!-- postsPriem под этим названием этот ком-т принимает массив из ком-та PostList -->
 </template>
 
 <script>
 import PostForm from '@/components/PostForm.vue';
 import PostList from '@/components/PostList.vue';
-import MyDialog from '@/components/UI/MyDialog';
-import MyBtn from '@/components/UI/MyBtn';
+
+import axios from 'axios';
 export default {
     components: {
-      PostForm,
-      PostList,
-      MyBtn,
-      MyDialog,
-
-    },
+    PostForm,
+    PostList
+},
+  
     data() {
         return {
-            posts: [
-                { id: 1, title: 'Название', body: 'Описание поста' },
-                { id: 2, title: 'Название 2', body: 'Описание поста 222' },
-                { id: 3, title: 'Название 3', body: 'Описание поста 333' }
-            ],
-
-            dialogVisible: false
+            posts: () => [],
+            dialogVisible: false,
+            selestedSort: '',
+            sortOptions: [
+              {value: 'title', name: 'По названию'},
+              {value: 'body', name: 'По описанию'}
+            ]
+           // isPostsLoading: false
         }
     },
     methods: {
@@ -45,12 +53,31 @@ export default {
          this.dialogVisible = false
         },
         removePost(element) { 
-          this.posts = this.posts.filter((post) => post.id !== element.id)
+          this.posts = this.posts.filter(p => p.id !== element.id)
         },
         showDialog() {
           this.dialogVisible = true
-        }
-    }
+        },
+        async fetchPosts() {
+          try {
+            //this.isPostsLoading = true;
+          setTimeout( async () => {
+            const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+            this.posts = response.data }, 2000);
+            //this.isPostsLoading = false;
+          } catch (e) {
+              alert('Oshibka');
+          }
+        }  },
+
+       mounted() {
+          this.fetchPosts()
+        },
+     /*    watch: {
+          selestedSort(sort_string) {
+           
+          }
+        } */
 }
 </script>
 
@@ -61,8 +88,14 @@ body {
 }
 
 #app {
+    
     width: 90vw;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
+ }
+
+ .btn-box {
+  display: flex;
+  justify-content: space-between;
  }
 
 </style>

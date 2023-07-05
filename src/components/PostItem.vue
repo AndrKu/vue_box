@@ -1,11 +1,12 @@
 <template>
    <div class="post">
     <div class="post-line">
-    <div><strong>Название:</strong> {{ postPropsElement.title }}</div>
-    <div><strong>Описание:</strong> {{ postPropsElement.body }}</div>
+    <div><strong>Название:</strong> {{ post.title }}</div>
+    <div><strong>Описание:</strong> {{ post.body }}</div>
   </div>
   <my-btn
-    @click="$emit('remove', postPropsElement)">
+    @click="$emit('remove-post')"
+     >
     Удалить
   </my-btn>  
 
@@ -13,11 +14,10 @@
 </template>
 
 <script>
-import MyBtn from './UI/MyBtn';
    export default {
-  components: { MyBtn },
+  emits: ['remove-post'],
   props: {
-    postPropsElement: { //Название только в данном компоненте
+    post: { //Название только в данном компоненте
       type: Object,
       required: true,
     }
@@ -28,7 +28,7 @@ import MyBtn from './UI/MyBtn';
 <style scoped>
 .post {
     padding: 1%;
-    margin: 3%;
+    margin-bottom: 3%;
     border: 2px solid rgb(188, 55, 21);
     border-radius: 6px;
     display: flex;
